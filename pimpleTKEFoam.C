@@ -67,14 +67,14 @@ int main(int argc, char *argv[])
 
     //*****************adding reference point of VVCS ************************//
     Info << "searching reference points" <<endls;
-    vector refpoint1(),
-           refpoint2(),
-           refpoint3(),
-           refpoint4(),
-           refpoint5(),
-           refpoint6(),
-           refpoint7(),
-           refpoint8();
+    vector refpoint1(6.283145314,0.02104728876,3.141572657),
+           refpoint2(6.283145314, 0.3402290458,3.141572657),
+           refpoint3(6.283145314, 0.4335083697,3.141572657),
+           refpoint4(6.283145314, 0.7016601976,3.141572657),
+           refpoint5(6.283145314, 0.8263088868,3.141572657),     //??? what is
+           refpoint6(6.283145314, 0.95414283685,3.141572657),
+           refpoint7(6.283145314,0.998026526599,3.141572657),
+           refpoint8(6.283145314,0.99950295625,3.141572657);
     
     label refID1,refID2,refID3,refID4,refID5,refID5,refID6,refID7,refID8;
     
