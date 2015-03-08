@@ -204,6 +204,20 @@ volVectorField vorticityMeanMap
 
 volVectorField Wturb(vorticity-vorticityMeanMap);
 
+Info<< "Reading field URMSMap\n" << endl;
+volVectorField URMSMap
+(
+    IOobject
+    (
+        "URMSMap",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::NO_WRITE
+     ),
+    mesh
+);
+
 volTensorField ShearStress
 (
     IOobject
@@ -464,8 +478,213 @@ volScalarField epsilonZZ
        +fvc::grad(Uturb)().component(tensor::ZZ)*fvc::grad(Uturb)().component(tensor::ZZ)
 );
 //#############VVCS parameters ################//
+volScalarField RUlam1
+(
+    IOobject
+    (
+        "RUlam1",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+     Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
 
+volVectorField RUW1
+(
+    IOobject
+    (
+        "RUW1",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
 
+volScalarField RUlam2
+(
+    IOobject
+    (
+        "RUlam2",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW2
+(
+    IOobject
+    (
+        "RUW2",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
+
+volScalarField RUlam3
+(
+    IOobject
+    (
+        "RUlam3",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW3
+(
+    IOobject
+    (
+        "RUW3",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+ Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
+
+volScalarField RUlam4
+(
+    IOobject
+    (
+        "RUlam4",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW4
+(
+    IOobject
+    (
+        "RUW4",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
+
+volScalarField RUlam5
+(
+    IOobject
+    (
+        "RUlam5",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW5
+(
+    IOobject
+    (
+        "RUW5",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+        Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
+
+volScalarField RUlam6
+(
+    IOobject
+    (
+        "RUlam6",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW6
+(
+    IOobject
+    (
+        "RUW6",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
+
+volScalarField RUlam7
+(
+    IOobject
+    (
+        "RUlam7",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW7
+(
+    IOobject
+    (
+        "RUW7",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+ );
+
+volScalarField RUlam8
+(
+    IOobject
+    (
+        "RUlam8",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    Uturb.component(vector::X)()*Lambda2/URMSMap.component(vector::X)
+ );
+
+volVectorField RUW8
+(
+    IOobject
+    (
+        "RUW8",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb.component(vector::X)()*Wturb/URMSMap.component(vector::X)
+);
 //################END of VVCS ##################/
 
 
