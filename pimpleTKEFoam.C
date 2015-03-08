@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 
     //*****************adding reference point of VVCS ************************//
     Info << "searching reference points" <<endl;
-    vector refpoint1(6.250420599,0.02104728876,3.174297372),
+    vector refpoint1(6.250420599, 0.02104728876,3.174297372),
            refpoint2(6.250420599, 0.3402290458,3.174297372),
            refpoint3(6.250420599, 0.4335083697,3.174297372),
            refpoint4(6.250420599, 0.7016601976,3.174297372),
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     
     label refID1(0),refID2(0),refID3(0),refID4(0),refID5(0),refID6(0),refID7(0),refID8(0);
     
-    scalar disTol(1e-3);
+    scalar disTol(1e-1);
     
     forAll(U, cellI){
         if(Foam::mag(mesh.C()[cellI]-refpoint1)<disTol){refID1=cellI;}
@@ -133,17 +133,6 @@ int main(int argc, char *argv[])
             }
         }
 
-        pU=p*U;
-        Uxxx=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::X)();
-        Uxxy=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::Y)();
-        Uxxz=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::Z)();
-        Uyyy=U.component(vector::Y)()*U.component(vector::Y)()*U.component(vector::Y)();
-        Uyyx=U.component(vector::Y)()*U.component(vector::Y)()*U.component(vector::X)();
-        Uyyz=U.component(vector::Y)()*U.component(vector::Y)()*U.component(vector::Z)();
-        Uzzx=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::X)();
-        Uzzy=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::Y)();
-        Uzzz=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::Z)();
-
         vorticity=fvc::curl(U);
         Uturb=(U-UMeanMap);
         //ZHANG WEI ADD
@@ -151,7 +140,7 @@ int main(int argc, char *argv[])
         const volTensorField gradU(fvc::grad(U));
         ShearStress=0.5*(gradU + gradU.T());
         WpWp=Wturb*Wturb;
-      //  Info << "1" <<endl;
+
         Pens21 =   vorticity.component(vector::X)()*ShearStress.component(tensor::XX)()
                  + vorticity.component(vector::Y)()*ShearStress.component(tensor::YX)()
                  + vorticity.component(vector::Z)()*ShearStress.component(tensor::ZX)();
@@ -172,48 +161,13 @@ int main(int argc, char *argv[])
 
         DisEnstropy = fvc::grad(Wturb)&&fvc::grad(Wturb)().T();
 
-        //Q=0.5*(sqr(tr(fvc::grad(U))) - tr(((fvc::grad(U))&(fvc::grad(U)))));
         // Lambda2
-
         volTensorField SSplusWW
         (
            (symm(gradU) & symm(gradU)) + (skew(gradU) & skew(gradU))
         );
-        //Info << "2" << endl;
+
         Lambda2=-eigenValues(SSplusWW)().component(vector::Y);
-
-
-        //epsilon
-        epsilon=fvc::grad(Uturb)&&fvc::grad(Uturb)().T();
-
-
-        Trans= Uturb.component(vector::X)()*Uturb.component(vector::X)()*Uturb.component(vector::Y)()\
-               +Uturb.component(vector::Y)()*Uturb.component(vector::Y)()*Uturb.component(vector::Y)()\
-               +Uturb.component(vector::Z)()*Uturb.component(vector::Z)()*Uturb.component(vector::Y)();
-
-      epsilonXX=fvc::grad(Uturb)().component(tensor::XX)*fvc::grad(Uturb)().component(tensor::XX) \
-                +fvc::grad(Uturb)().component(tensor::XY)*fvc::grad(Uturb)().component(tensor::XY) \
-                +fvc::grad(Uturb)().component(tensor::XZ)*fvc::grad(Uturb)().component(tensor::XZ);
-
-      epsilonXY=fvc::grad(Uturb)().component(tensor::XX)*fvc::grad(Uturb)().component(tensor::YX) \
-                +fvc::grad(Uturb)().component(tensor::XY)*fvc::grad(Uturb)().component(tensor::YY) \
-                +fvc::grad(Uturb)().component(tensor::XZ)*fvc::grad(Uturb)().component(tensor::YZ);
-
-      epsilonXZ=fvc::grad(Uturb)().component(tensor::XX)*fvc::grad(Uturb)().component(tensor::ZX) \
-                +fvc::grad(Uturb)().component(tensor::XY)*fvc::grad(Uturb)().component(tensor::ZY) \
-                +fvc::grad(Uturb)().component(tensor::XZ)*fvc::grad(Uturb)().component(tensor::ZZ);
-
-      epsilonYY=fvc::grad(Uturb)().component(tensor::YX)*fvc::grad(Uturb)().component(tensor::YX) \
-                +fvc::grad(Uturb)().component(tensor::YY)*fvc::grad(Uturb)().component(tensor::YY) \
-                +fvc::grad(Uturb)().component(tensor::YZ)*fvc::grad(Uturb)().component(tensor::YZ);
-
-      epsilonYZ=fvc::grad(Uturb)().component(tensor::YX)*fvc::grad(Uturb)().component(tensor::ZX) \
-                +fvc::grad(Uturb)().component(tensor::YY)*fvc::grad(Uturb)().component(tensor::ZY) \
-                +fvc::grad(Uturb)().component(tensor::YZ)*fvc::grad(Uturb)().component(tensor::ZZ);
-
-      epsilonZZ=fvc::grad(Uturb)().component(tensor::ZX)*fvc::grad(Uturb)().component(tensor::ZX) \
-                +fvc::grad(Uturb)().component(tensor::ZY)*fvc::grad(Uturb)().component(tensor::ZY) \
-                +fvc::grad(Uturb)().component(tensor::ZZ)*fvc::grad(Uturb)().component(tensor::ZZ);
 
         runTime.write();
 
