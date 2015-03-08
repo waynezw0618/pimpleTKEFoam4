@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
            refpoint7(6.283145314,0.998026526599,3.141572657),
            refpoint8(6.283145314,0.99950295625,3.141572657);
     
-    label refID1,refID2,refID3,refID4,refID5,refID6,refID7,refID8;
+    label refID1(0),refID2(0),refID3(0),refID4(0),refID5(0),refID6(0),refID7(0),refID8(0);
     
     scalar disTol(1e-5);
     
