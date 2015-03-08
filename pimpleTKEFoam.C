@@ -56,14 +56,14 @@ int main(int argc, char *argv[])
 
     //*****************adding reference point of VVCS ************************//
     Info << "searching reference points" <<endl;
-    vector refpoint1(6.250420599, 0.02104728876,3.174297372),
-           refpoint2(6.250420599, 0.3402290458,3.174297372),
-           refpoint3(6.250420599, 0.4335083697,3.174297372),
-           refpoint4(6.250420599, 0.7016601976,3.174297372),
-           refpoint5(6.250420599, 0.8263088868,3.174297372),     //??? what is
-           refpoint6(6.250420599, 0.95414283685,3.174297372),
-           refpoint7(6.250420599,0.998026526599,3.174297372),
-           refpoint8(6.250420599,0.99950295625,3.174297372);
+    vector refpoint1(6.250420599, 0.02104728876,3.004128853),
+           refpoint2(6.250420599, 0.3402290458,3.004128853),
+           refpoint3(6.250420599, 0.4335083697,3.004128853),
+           refpoint4(6.250420599, 0.7016601976,3.004128853),
+           refpoint5(6.250420599, 0.8263088868,3.004128853),     //??? what is
+           refpoint6(6.250420599, 0.95414283685,3.004128853),
+           refpoint7(6.250420599,0.998026526599,3.004128853),
+           refpoint8(6.250420599,0.99950295625,3.004128853);
     
     label refID1(0),refID2(0),refID3(0),refID4(0),refID5(0),refID6(0),refID7(0),refID8(0);
     
@@ -78,13 +78,6 @@ int main(int argc, char *argv[])
         if(Foam::mag(mesh.C()[cellI]-refpoint6)<disTol){refID6=cellI;}
         if(Foam::mag(mesh.C()[cellI]-refpoint7)<disTol){refID7=cellI;}
         if(Foam::mag(mesh.C()[cellI]-refpoint8)<disTol){refID8=cellI;}
-        if(Foam::mag(mesh.C()[cellI].component(vector::Y)-0.02104728876)<disTol){
-            if(Foam::mag(mesh.C()[cellI].component(vector::X)-6.28)<0.5){
-                if(Foam::mag(mesh.C()[cellI].component(vector::Z)-3.14)<0.5){
-                    Info << mesh.C()[cellI];
-            }
-          }
-        }
     }
     
     Info<<"the 1st refpoint cell["<<refID1<<"] is at "<< mesh.C()[refID1] <<nl
