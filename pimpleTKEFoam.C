@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     
     label refID1(0),refID2(0),refID3(0),refID4(0),refID5(0),refID6(0),refID7(0),refID8(0);
     
-    scalar disTol(1e-5);
+    /*scalar disTol(1e-5);
     
     forAll(U, cellI){
         if(Foam::mag(mesh.C()[cellI]-refpoint1)<disTol){refID1=cellI;}
@@ -78,16 +78,18 @@ int main(int argc, char *argv[])
         if(Foam::mag(mesh.C()[cellI]-refpoint6)<disTol){refID6=cellI;}
         if(Foam::mag(mesh.C()[cellI]-refpoint7)<disTol){refID7=cellI;}
         if(Foam::mag(mesh.C()[cellI]-refpoint8)<disTol){refID8=cellI;}
-    }
+    }*/
+    
+    refID1=mesh.findCell(refpoint1);
     
     Info<<"the 1st refpoint cell["<<refID1<<"] is at "<< mesh.C()[refID1] <<nl
         <<"the 2nd refpoint cell["<<refID2<<"] is at "<< mesh.C()[refID2] <<nl
         <<"the 3rd refpoint cell["<<refID3<<"] is at "<< mesh.C()[refID3] <<nl
         <<"the 4th refpoint cell["<<refID4<<"] is at "<< mesh.C()[refID4] <<nl
         <<"the 5th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID5] <<nl
-        <<"the 6th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID6] <<nl
-        <<"the 7th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID7] <<nl
-        <<"the 8th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID8] <<endl;
+        <<"the 6th refpoint cell["<<refID6<<"] is at "<< mesh.C()[refID6] <<nl
+        <<"the 7th refpoint cell["<<refID7<<"] is at "<< mesh.C()[refID7] <<nl
+        <<"the 8th refpoint cell["<<1268639<<"] is at "<< mesh.C()[1268639] <<endl;
     
     //*********************end reference point *******************************//
     
@@ -121,6 +123,8 @@ int main(int argc, char *argv[])
                 turbulence->correct();
             }
         }
+        
+        Info << "velocity there @ point 5 is " <<U[1268639] <<endl;
 
         pU=p*U;
         Uxxx=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::X)();
