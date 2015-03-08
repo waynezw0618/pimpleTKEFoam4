@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     
     label refID1(0),refID2(0),refID3(0),refID4(0),refID5(0),refID6(0),refID7(0),refID8(0);
     
-    scalar disTol(1e-5);
+    scalar disTol(1e-3);
     
     forAll(U, cellI){
         if(Foam::mag(mesh.C()[cellI]-refpoint1)<disTol){refID1=cellI;}
