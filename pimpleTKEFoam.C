@@ -79,7 +79,10 @@ int main(int argc, char *argv[])
         if(Foam::mag(mesh.C()[cellI]-refpoint7)<disTol){refID7=cellI;}
         if(Foam::mag(mesh.C()[cellI]-refpoint8)<disTol){refID8=cellI;}
         if(Foam::mag(mesh.C()[cellI].component(vector::Y)-0.02104728876)<disTol){
-            Info << mesh.C()[cellI];
+            if(Foam::mag(mesh.C()[cellI].component(vector::X)-6.28)<0.1){
+                if(Foam::mag(mesh.C()[cellI].component(vector::Z)-3.14)<0.1){
+                    Info << mesh.C()[cellI];
+            }
         }
     }
     
