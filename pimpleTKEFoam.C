@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
                 if(Foam::mag(mesh.C()[cellI].component(vector::Z)-3.14)<0.1){
                     Info << mesh.C()[cellI];
             }
+          }
         }
     }
     
