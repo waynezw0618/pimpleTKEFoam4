@@ -65,6 +65,43 @@ int main(int argc, char *argv[])
 
     pimpleControl pimple(mesh);
 
+    //*****************adding reference point of VVCS ************************//
+    Info << "searching reference points" <<endls;
+    vector refpoint1(),
+           refpoint2(),
+           refpoint3(),
+           refpoint4(),
+           refpoint5(),
+           refpoint6(),
+           refpoint7(),
+           refpoint8();
+    
+    label refID1,refID2,refID3,refID4,refID5,refID5,refID6,refID7,refID8;
+    
+    dimensionedScalar disTol("disTol",dimless,1e-3);
+    
+    forAll(U, cellI){
+        if(Foam::mag(mesh.C()[cellI]-refpoint1)<disTol){refID1=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint2)<disTol){refID2=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint3)<disTol){refID3=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint4)<disTol){refID4=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint5)<disTol){refID5=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint6)<disTol){refID6=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint7)<disTol){refID7=cellI;}
+        if(Foam::mag(mesh.C()[cellI]-refpoint8)<disTol){refID8=cellI;}
+    }
+    
+    Info<<"the 1st refpoint cell["<<refID1<<"] is at "<< mesh.C()[refID1] <<nl
+        <<"the 2nd refpoint cell["<<refID2<<"] is at "<< mesh.C()[refID2] <<nl
+        <<"the 3rd refpoint cell["<<refID3<<"] is at "<< mesh.C()[refID3] <<nl
+        <<"the 4th refpoint cell["<<refID4<<"] is at "<< mesh.C()[refID4] <<nl
+        <<"the 5th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID5] <<nl
+        <<"the 6th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID6] <<nl
+        <<"the 7th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID7] <<nl
+        <<"the 8th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID8] <<endl;
+    
+    //*********************end reference point *******************************//
+    
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;

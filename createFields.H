@@ -463,6 +463,10 @@ volScalarField epsilonZZ
        +fvc::grad(Uturb)().component(tensor::ZY)*fvc::grad(Uturb)().component(tensor::ZY) \
        +fvc::grad(Uturb)().component(tensor::ZZ)*fvc::grad(Uturb)().component(tensor::ZZ)
 );
+//#############VVCS parameters ################//
+
+
+//################END of VVCS ##################/
 
 
 
