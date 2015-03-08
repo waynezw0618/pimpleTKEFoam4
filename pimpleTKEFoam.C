@@ -67,18 +67,42 @@ int main(int argc, char *argv[])
     
     label refID1(0),refID2(0),refID3(0),refID4(0),refID5(0),refID6(0),refID7(0),refID8(0);
     
-    /*scalar disTol(1e-5);
+    scalar disTol(1e-5);
     
     forAll(U, cellI){
-        if(Foam::mag(mesh.C()[cellI]-refpoint1)<disTol){refID1=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint2)<disTol){refID2=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint3)<disTol){refID3=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint4)<disTol){refID4=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint5)<disTol){refID5=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint6)<disTol){refID6=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint7)<disTol){refID7=cellI;}
-        if(Foam::mag(mesh.C()[cellI]-refpoint8)<disTol){refID8=cellI;}
-    }*/
+        if(Foam::mag(mesh.C()[cellI]-refpoint1)<disTol){
+            refID1=cellI;
+            reduce(refID1, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint2)<disTol){
+            refID2=cellI;
+            reduce(refID2, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint3)<disTol){
+            refID3=cellI;
+            reduce(refID3, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint4)<disTol){
+            refID4=cellI;
+            reduce(refID4, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint5)<disTol){
+            refID5=cellI;
+            reduce(refID5, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint6)<disTol){
+            refID6=cellI;
+            reduce(refID6, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint7)<disTol){
+            refID7=cellI;
+            reduce(refID7, maxOp<label>());
+        }
+        if(Foam::mag(mesh.C()[cellI]-refpoint8)<disTol){
+            refID8=cellI;
+            reduce(refID8, maxOp<label>());
+        }
+    }
     
     refID1=mesh.findCell(refpoint1);
     
@@ -89,7 +113,7 @@ int main(int argc, char *argv[])
         <<"the 5th refpoint cell["<<refID5<<"] is at "<< mesh.C()[refID5] <<nl
         <<"the 6th refpoint cell["<<refID6<<"] is at "<< mesh.C()[refID6] <<nl
         <<"the 7th refpoint cell["<<refID7<<"] is at "<< mesh.C()[refID7] <<nl
-        <<"the 8th refpoint cell["<<1268639<<"] is at "<< mesh.C()[1268639] <<endl;
+        <<"the 8th refpoint cell["<<refID8<<"] is at "<< mesh.C()[refID8] <<endl;
     
     //*********************end reference point *******************************//
     
