@@ -8,12 +8,21 @@ if (pimple.nCorrPISO() <= 1)
     UEqn.clear();
 }
 
+//for 2.2.2
 surfaceScalarField phiHbyA
 (
     "phiHbyA",
     (fvc::interpolate(HbyA) & mesh.Sf())
-  + fvc::ddtPhiCorr(rAU, U, phi)
+    + fvc::ddtPhiCorr(rAU, U, phi)
 );
+
+//for 2.3.x
+/*surfaceScalarField phiHbyA
+(
+ "phiHbyA",
+ (fvc::interpolate(HbyA) & mesh.Sf())
+ + rAUf*fvc::ddtCorr(U, phi)
+ );*/
 
 fvOptions.relativeFlux(phiHbyA);
 //fvOptions.makeRelative(phiHbyA);  //for OF2.3.x
