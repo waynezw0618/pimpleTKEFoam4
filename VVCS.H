@@ -46,11 +46,11 @@
     Pout<<"Uturref are :" << UturbrefList << endl;
 
     for(label j=0; j< refpts.size(); j++){
-        RUW[j]().component(vector::Y) = UturbrefList[j]*Wturb.component(vector::X) \
+        RUW[j].component(vector::Y) = UturbrefList[j]*Wturb.component(vector::X) \
                                         /(URMSrefList[j]*vorticityRMSMap.component(vector::X));
-        RUW[j]().component(vector::Y) = UturbrefList[j]*Wturb.component(vector::Y) \
+        RUW[j].component(vector::Y) = UturbrefList[j]*Wturb.component(vector::Y) \
                                         /(URMSrefList[j]*vorticityRMSMap.component(vector::Y));
-        RUW[j]().component(vector::Y) = UturbrefList[j]*Wturb.component(vector::Z) \
+        RUW[j].component(vector::Y) = UturbrefList[j]*Wturb.component(vector::Z) \
                                         /(URMSrefList[j]*vorticityRMSMap.component(vector::Z));
          if (runTime.outputTime()){
          	 RUW[j].write();

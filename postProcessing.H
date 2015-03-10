@@ -7,8 +7,8 @@ const volTensorField gradU(fvc::grad(U));
 ShearStress=0.5*(gradU + gradU.T());
 WpWp=Wturb*Wturb;
 
-＃include "CalcTKE.H"
-＃include "CalcEnstrophy.H"
+#include "CalcTKE.H"
+#include "CalcEnstrophy.H"
 
 // Lambda2
 volTensorField SSplusWW

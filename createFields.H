@@ -42,7 +42,21 @@ volVectorField UMeanMap
 
 volVectorField Uturb(U-UMeanMap);
 
+Info<< "Reading field URMSMap\n" << endl;
+volVectorField URMSMap
+(
+    IOobject
+    (
+        "URMSMap",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::NO_WRITE
+     ),
+    mesh
+ );
 Info<< "Calculating vorticity \n" << endl;
+
 volVectorField vorticity
 (
    IOobject
@@ -57,6 +71,7 @@ volVectorField vorticity
 );
 
 Info<< "Reading field vorticityMeanMap\n" << endl;
+
 volVectorField vorticityMeanMap
 (
     IOobject
@@ -72,22 +87,9 @@ volVectorField vorticityMeanMap
 
 volVectorField Wturb(vorticity-vorticityMeanMap);
 
-Info<< "Reading field URMSMap\n" << endl;
-volVectorField URMSMap
-(
-    IOobject
-    (
-        "URMSMap",
-        runTime.timeName(),
-        mesh,
-        IOobject::MUST_READ,
-        IOobject::NO_WRITE
-     ),
-    mesh
- );
 
 Info<< "Reading field vorticityRMSMap\n" << endl;
-volVectorField URMSMap
+volVectorField vorticityRMSMap
 (
     IOobject
     (
