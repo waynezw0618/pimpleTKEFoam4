@@ -155,8 +155,8 @@
     }
 
     Info << "URMS @ master are:" << URMSrefList << endl;
-    Pstream::scatter(UturbrefList, Pstream::blocking);
-    Pout<<"Uturref@["<< Pstream::myProcNo() <<"] are :" << URMSrefList << endl;
+    Pstream::scatter(URMSrefList, Pstream::blocking);
+    Pout << "URMS@["<< Pstream::myProcNo() <<"] are :" << URMSrefList << endl;
 
     forAll(CorrList,idx){
          Info <<"magitude of " << idx <<"th refence point is : " << mag(CorrList[idx]) <<endl;
