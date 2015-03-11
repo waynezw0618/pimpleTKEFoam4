@@ -9,27 +9,27 @@ if (pimple.nCorrPISO() <= 1)
 }
 
 //for 2.2.2
-surfaceScalarField phiHbyA
+/*surfaceScalarField phiHbyA
 (
     "phiHbyA",
     (fvc::interpolate(HbyA) & mesh.Sf())
     + fvc::ddtPhiCorr(rAU, U, phi)
-);
+);*/
 
 //for 2.3.x
-/*surfaceScalarField phiHbyA
+surfaceScalarField phiHbyA
 (
  "phiHbyA",
  (fvc::interpolate(HbyA) & mesh.Sf())
  + rAUf*fvc::ddtCorr(U, phi)
- );*/
+ );
 
-fvOptions.relativeFlux(phiHbyA);
-//fvOptions.makeRelative(phiHbyA);  //for OF2.3.x
+//fvOptions.relativeFlux(phiHbyA);
+fvOptions.makeRelative(phiHbyA);  //for OF2.3.x
 
 adjustPhi(phiHbyA, U, p);
 
-/* for OF2.3.X
+//for OF2.3.x
 // Update the fixedFluxPressure BCs to ensure flux consistency
 setSnGrad<fixedFluxPressureFvPatchScalarField>
 (
@@ -39,7 +39,7 @@ setSnGrad<fixedFluxPressureFvPatchScalarField>
       - fvOptions.relative(mesh.Sf().boundaryField() & U.boundaryField())
     )/(mesh.magSf().boundaryField()*rAUf.boundaryField())
 );
-*/
+
 
 // Non-orthogonal pressure corrector loop
 while (pimple.correctNonOrthogonal())
