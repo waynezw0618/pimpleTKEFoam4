@@ -8,7 +8,7 @@
 
     Info<<"searching reference points" <<endl;
     //
-    const dictionary& pimpleDict = pimple.dict();
+
     List<vector> refpts = List<vector>(pimpleDict.lookup("Yrs"));
     labelList ownerProIDlist(refpts.size(),0);
     labelList localIDlist(refpts.size(),0);

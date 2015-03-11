@@ -1,4 +1,8 @@
 Info << "Calculating Enstropy ..." <<endl;
+
+const volTensorField gradU(fvc::grad(U));
+ShearStress=0.5*(gradU + gradU.T());
+WpWp=Wturb*Wturb;
 Pens21 = vorticity.component(vector::X)()*ShearStress.component(tensor::XX)()
         + vorticity.component(vector::Y)()*ShearStress.component(tensor::YX)()
         + vorticity.component(vector::Z)()*ShearStress.component(tensor::ZX)();

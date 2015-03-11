@@ -41,7 +41,7 @@ Description
 #include "fvIOoptionList.H"
 #include "IOporosityModelList.H"
 #include "IOMRFZoneList.H"
-//#include "fixedFluxPressureFvPatchScalarField.H"  // for OF2.3.x
+#include "fixedFluxPressureFvPatchScalarField.H"  // for OF2.3.x
 #include <vector>
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -55,7 +55,19 @@ int main(int argc, char *argv[])
     #include "initContinuityErrs.H"
 
     pimpleControl pimple(mesh);
-    #include "initialReferencePoints.H"
+    const dictionary& pimpleDict = pimple.dict();
+    Switch TKEbuget(pimpleDict.lookupOrDefault<Switch>("TKEbuget",false));
+    Switch Enstrophy(pimpleDict.lookupOrDefault<Switch>("Enstrophy",false));
+    Switch VVCS(pimpleDict.lookupOrDefault<Switch>("VVCS",false));
+    
+    if(TKEbuget)
+            #include "TKE.H"
+ 
+    if(Enstrophy)
+            #include "Enstrophy.H"
+    
+    if(VVCS)
+            #include "initialReferencePoints.H"
 
     //*****************adding reference point of VVCS ************************//
     

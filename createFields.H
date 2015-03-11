@@ -102,10 +102,8 @@ volVectorField vorticityRMSMap
     mesh
 );
 
-#include "TKE.H"
-#include "Enstrophy.H"
 
-volScalarField Lambda2
+/*volScalarField Lambda2
 (
     IOobject
     (
@@ -118,7 +116,7 @@ volScalarField Lambda2
     mesh,
     dimensionedScalar("zero", dimensionSet(0, 0, -2, 0, 0, 0, 0), 0.0)
 );
-
+*/
 
 #include "createPhi.H"
 
