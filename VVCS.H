@@ -47,8 +47,8 @@
 
     for(label j=0; j< refpts.size(); j++){
         RUW[j].replace(vector::X, UturbrefList[j]*Wturb.component(vector::X)/(URMSrefList[j]*vorticityRMSMap.component(vector::X)));
-        RUW[j].replace(vector::Y), UturbrefList[j]*Wturb.component(vector::Y)/(URMSrefList[j]*vorticityRMSMap.component(vector::Y)));
-        RUW[j].replace(vector::Z), UturbrefList[j]*Wturb.component(vector::Z)/(URMSrefList[j]*vorticityRMSMap.component(vector::Z)));
+        RUW[j].replace(vector::Y, UturbrefList[j]*Wturb.component(vector::Y)/(URMSrefList[j]*vorticityRMSMap.component(vector::Y)));
+        RUW[j].replace(vector::Z, UturbrefList[j]*Wturb.component(vector::Z)/(URMSrefList[j]*vorticityRMSMap.component(vector::Z)));
          if (runTime.outputTime()){
          	 RUW[j].write();
           }
