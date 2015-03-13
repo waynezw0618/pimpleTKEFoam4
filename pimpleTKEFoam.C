@@ -53,8 +53,6 @@ int main(int argc, char *argv[])
     #include "createFields.H"
     #include "createFvOptions.H"
     #include "initContinuityErrs.H"
-    
-     test
 
     pimpleControl pimple(mesh);
     const dictionary& pimpleDict = pimple.dict();
