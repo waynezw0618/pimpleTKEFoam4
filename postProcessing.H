@@ -1,9 +1,6 @@
 Info << "post processing for TKE, Enstropy and VVCS" << endl;
 
 Uturb=(U-UMeanMap);
-vorticity=fvc::curl(U);
-Wturb=(vorticity-vorticityMeanMap);
-
 
 if(TKEbuget)
     #include "CalcTKE.H"

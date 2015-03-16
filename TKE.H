@@ -1,6 +1,6 @@
 Info << "creating variable for TKE analysis" <<endl;
 
-volVectorField pU
+volVectorField pU   //Pressure diffusion term (3)
 (
     IOobject
     (
@@ -10,10 +10,49 @@ volVectorField pU
         IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     ),
-    p*U
+    pturb*Uturb
 );
 
-volScalarField Uxxx
+volTensorField UpUp  // for diffusion term (4)
+(
+    IOobject
+    (
+        "UpUp",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    Uturb*Uturb
+ );
+
+volTensorField Trans  // three dimensioned for Reynolds stress analysis (2)
+(
+    IOobject
+    (
+        "Trans",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+     ),
+    UpUp*Uturb.component(vector::Y)
+);
+
+volTensorField PreStrain  // pressure strain term. (6)
+(
+    IOobject
+    (
+        "PreStrain",
+        runTime.timeName(),
+        mesh,
+        IOobject::READ_IF_PRESENT,
+        IOobject::AUTO_WRITE
+    ),
+    0.5*pturb*(fvc::grad(Uturb) + (fvc::grad(Uturb)).T())
+ );
+
+/*volScalarField Uxxx
 (
     IOobject
     (
@@ -129,7 +168,7 @@ volScalarField Uzzy
      ),
     U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::Y)()
 );
-
+*/
 //epsilon
 volScalarField epsilon
 (
@@ -144,22 +183,7 @@ volScalarField epsilon
     fvc::grad(Uturb)&&fvc::grad(Uturb)().T()
 );
 
-volScalarField Trans
-(
-    IOobject
-    (
-        "Trans",
-        runTime.timeName(),
-        mesh,
-        IOobject::READ_IF_PRESENT,
-        IOobject::AUTO_WRITE
-     ),
-    Uturb.component(vector::X)()*Uturb.component(vector::X)()*Uturb.component(vector::Y)()\
-    +Uturb.component(vector::Y)()*Uturb.component(vector::Y)()*Uturb.component(vector::Y)()\
-    +Uturb.component(vector::Z)()*Uturb.component(vector::Z)()*Uturb.component(vector::Y)()
-);
-
-//epsilon
+//epsilon(5)
 volScalarField epsilonXX
 (
     IOobject

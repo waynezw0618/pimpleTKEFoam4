@@ -12,6 +12,23 @@ volScalarField p
     mesh
 );
 
+Info<< "Reading field pMeanMap\n" << endl;
+volScalarField pMeanMap
+(
+    IOobject
+    (
+        "pMeanMap",
+        runTime.timeName(),
+        mesh,
+        IOobject::MUST_READ,
+        IOobject::AUTO_WRITE
+     ),
+    mesh
+ );
+
+volScalarField pturb(p-pMeanMap);
+
+
 Info<< "Reading field U\n" << endl;
 volVectorField U
 (
@@ -35,7 +52,7 @@ volVectorField UMeanMap
         runTime.timeName(),
         mesh,
         IOobject::MUST_READ,
-        IOobject::NO_WRITE
+        IOobject::AUTO_WRITE
     ),
     mesh
 );
@@ -51,7 +68,7 @@ volVectorField URMSMap
         runTime.timeName(),
         mesh,
         IOobject::MUST_READ,
-        IOobject::NO_WRITE
+        IOobject::AUTO_WRITE
      ),
     mesh
  );
@@ -80,7 +97,7 @@ volVectorField vorticityMeanMap
         runTime.timeName(),
         mesh,
         IOobject::MUST_READ,
-        IOobject::NO_WRITE
+        IOobject::AUTO_WRITE
     ),
     mesh
 );
@@ -97,7 +114,7 @@ volVectorField vorticityRMSMap
         runTime.timeName(),
         mesh,
         IOobject::MUST_READ,
-        IOobject::NO_WRITE
+        IOobject::AUTO_WRITE
      ),
     mesh
 );

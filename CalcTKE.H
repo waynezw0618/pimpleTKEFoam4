@@ -1,7 +1,11 @@
 Info<< "Calculating TKE Buget" << endl;
 
-pU=p*U;
-Uxxx=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::X)();
+pturb=p-pMeanMap;
+pU=pturb*Uturb;//TERM (3)
+UpUp=Uturb*Uturb; //TERM (4)
+Trans=UpUp*Uturb.component(vector::Y);//TERM(2)
+PreStrain=0.5*pturb*(fvc::grad(Uturb) + (fvc::grad(Uturb)).T());//(6)
+/*Uxxx=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::X)();
 Uxxy=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::Y)();
 Uxxz=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::Z)();
 Uyyy=U.component(vector::Y)()*U.component(vector::Y)()*U.component(vector::Y)();
@@ -10,8 +14,8 @@ Uyyz=U.component(vector::Y)()*U.component(vector::Y)()*U.component(vector::Z)();
 Uzzx=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::X)();
 Uzzy=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::Y)();
 Uzzz=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::Z)();
-
-//epsilon
+*/
+//epsilon(5)
 epsilon=fvc::grad(Uturb)&&fvc::grad(Uturb)().T();
 
 Trans = Uturb.component(vector::X)()*Uturb.component(vector::X)()*Uturb.component(vector::Y)()\
