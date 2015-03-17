@@ -49,7 +49,7 @@ volTensorField PreStrain  // pressure strain term. (6)
         IOobject::READ_IF_PRESENT,
         IOobject::AUTO_WRITE
     ),
-    0.5*pturb*(fvc::grad(Uturb) + (fvc::grad(Uturb)).T())
+    0.5*pturb*(fvc::grad(Uturb) + fvc::grad(Uturb).T())
  );
 
 /*volScalarField Uxxx

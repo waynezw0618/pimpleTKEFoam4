@@ -4,7 +4,9 @@ pturb=p-pMeanMap;
 pU=pturb*Uturb;//TERM (3)
 UpUp=Uturb*Uturb; //TERM (4)
 Trans=UpUp*Uturb.component(vector::Y);//TERM(2)
-PreStrain=0.5*pturb*(fvc::grad(Uturb) + (fvc::grad(Uturb)).T());//(6)
+
+const volTensorField gradUp(fvc::grad(U));
+PreStrain=0.5*pturb*(gradUp + gradUp.T());//(6)
 /*Uxxx=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::X)();
 Uxxy=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::Y)();
 Uxxz=U.component(vector::X)()*U.component(vector::X)()*U.component(vector::Z)();
@@ -18,7 +20,7 @@ Uzzz=U.component(vector::Z)()*U.component(vector::Z)()*U.component(vector::Z)();
 //epsilon(5)
 epsilon=fvc::grad(Uturb)&&fvc::grad(Uturb)().T();
 
-Trans = Uturb.component(vector::X)()*Uturb.component(vector::X)()*Uturb.component(vector::Y)()\
+//Trans = Uturb.component(vector::X)()*Uturb.component(vector::X)()*Uturb.component(vector::Y)()\
         +Uturb.component(vector::Y)()*Uturb.component(vector::Y)()*Uturb.component(vector::Y)()\
         +Uturb.component(vector::Z)()*Uturb.component(vector::Z)()*Uturb.component(vector::Y)();
 
